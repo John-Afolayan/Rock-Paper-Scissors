@@ -13,50 +13,79 @@ function playRound(playerSelection, computerSelection) {
         scissors: "paper"
     };
 
-    playerSelection = playerSelection.toLowerCase();
-    computerSelection = computerSelection.toLowerCase();
+    const resultsDiv = document.getElementById('results');
 
-    if(playerSelection === computerSelection) {
-        console.log(`Tie Round! You both chose ${playerSelection}.`);
+    playerSelectionLowerCase = playerSelection.toLowerCase();
+    computerSelectionLowerCase = computerSelection.toLowerCase();
+
+    if(playerSelectionLowerCase === computerSelectionLowerCase) {
+        resultsDiv.textContent = (`Tie Round! You both chose ${playerSelection}.`);
         return;
-    } 
-    
-    if (winningConditions[playerSelection] === computerSelection) { 
-        playerWonRound = true;
-        console.log(`You Win! ${playerSelection} beats ${computerSelection}.`);
+    } else if (winningConditions[playerSelectionLowerCase] === computerSelectionLowerCase) { 
+        resultsDiv.textContent = (`You Win! ${playerSelection} beats ${computerSelection}.`);
         return;
-    }  
-    
-    computerWonRound = true;
-    console.log(`You Lose! ${computerSelection} beats ${playerSelection}.`);
+    }  else {
+        resultsDiv.textContent = (`You Lose! beats ${computerSelection} beats ${playerSelection}.`);
+    }
+
+    playerWonRound = false;
+    computerWonRound = false;
+    resultsDiv.textContent = (`You Lose! ${computerSelection} beats ${playerSelection}.`);
 }
 
 function game() {
     humanWinCount = 0;
     computerWinCount = 0;
 
-    for(let i=1; i <= 5; i++) {
-        console.log(`Round ${i}:\n`);
-        var userChoice = prompt("Enter Rock, Paper, or Scissors.");
-        playRound(userChoice, getComputerChoice());
-        
-        if(playerWonRound === true) { //Checks if human player won most recent round
-            humanWinCount++;
-            playerWonRound = false;
-        } else if(computerWonRound === true){ //Checks if computer won most recent round
-            computerWinCount++;
-            computerWonRound = false;
-        }
-    }
+    roundText = document.getElementById('round');
+    let round = 1; // Initialize the round count
 
-    if (humanWinCount === computerWinCount) {
-        console.log(`Tie Game. Player and Computer both won ${humanWinCount} rounds.`);
-    } else if (humanWinCount > computerWinCount) {
-        console.log(`You won the game! You won ${humanWinCount} rounds, beating Computer's score of ${computerWinCount}.`);
-    } else {
-        console.log(`You lost the game :( Computer won ${computerWinCount} rounds, beating your score of ${humanWinCount}.`);
-    }
+    const buttonContainer = document.querySelector('#buttons');
+
+    const rockBtn = document.createElement('button');
+    rockBtn.textContent = 'Rock';
+    buttonContainer.appendChild(rockBtn);
+    
+    const paperBtn = document.createElement('button');
+    paperBtn.textContent = 'Paper';
+    buttonContainer.appendChild(paperBtn);
+
+    const scissorsBtn = document.createElement('button');
+    scissorsBtn.textContent = 'Scissors';
+    buttonContainer.appendChild(scissorsBtn);
+
+    const buttons = document.querySelectorAll('button');
+    
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            roundText.textContent = `Round ${round}\n`; // Update the round display
+            playRound(button.textContent, getComputerChoice());
+            
+            // Increment round
+            round++;
+            
+            if(playerWonRound === true) {
+                humanWinCount++;
+                playerWonRound = false;
+            } else if(computerWonRound === true){
+                computerWinCount++;
+                computerWonRound = false;
+            }
+
+            // Update the winner display
+            if (round > 5) {
+                const winner = document.getElementById('winner');
+                if (humanWinCount === computerWinCount) {
+                    winner.textContent = `Tie Game. Player and Computer both won ${humanWinCount} rounds.`;
+                } else if (humanWinCount > computerWinCount) {
+                    winner.textContent = `You won the game! You won ${humanWinCount} rounds, beating Computer's score of ${computerWinCount}.`;
+                } else {
+                    winner.textContent = `You lost the game :( Computer won ${computerWinCount} rounds, beating your score of ${humanWinCount}.`;
+                }
+            }
+        });
+    });
 }
 
+
 game();
-// console.log(playRound("rock", getComputerChoice()));
