@@ -13,6 +13,8 @@ function playRound(playerSelection, computerSelection) {
         scissors: "paper"
     };
 
+    playerWonRound = false;
+    computerWonRound = false;
     const resultsDiv = document.getElementById('results');
 
     playerSelectionLowerCase = playerSelection.toLowerCase();
@@ -23,14 +25,15 @@ function playRound(playerSelection, computerSelection) {
         return;
     } else if (winningConditions[playerSelectionLowerCase] === computerSelectionLowerCase) { 
         resultsDiv.textContent = (`You Win! ${playerSelection} beats ${computerSelection}.`);
+        playerWonRound = true;
         return;
     }  else {
         resultsDiv.textContent = (`You Lose! beats ${computerSelection} beats ${playerSelection}.`);
+        computerWonRound = true;
+        return;
     }
 
-    playerWonRound = false;
-    computerWonRound = false;
-    resultsDiv.textContent = (`You Lose! ${computerSelection} beats ${playerSelection}.`);
+    // resultsDiv.textContent = (`You Lose! ${computerSelection} beats ${playerSelection}.`);
 }
 
 function game() {
@@ -58,30 +61,50 @@ function game() {
     
     buttons.forEach((button) => {
         button.addEventListener('click', () => {
-            roundText.textContent = `Round ${round}\n`; // Update the round display
-            playRound(button.textContent, getComputerChoice());
-            
-            // Increment round
-            round++;
-            
-            if(playerWonRound === true) {
-                humanWinCount++;
-                playerWonRound = false;
-            } else if(computerWonRound === true){
-                computerWinCount++;
-                computerWonRound = false;
-            }
+                    // Update the video source based on the clicked option
+        const animation = document.getElementById('animation');
+        if (button.textContent === 'Rock') {
+            animation.src = 'rock.gif';
+        } else if (button.textContent === 'Paper') {
+            animation.src = 'paper.gif';
+        } else if (button.textContent === 'Scissors') {
+            animation.src = 'scissors.gif';
+        }
 
-            // Update the winner display
-            if (round > 5) {
-                const winner = document.getElementById('winner');
-                if (humanWinCount === computerWinCount) {
-                    winner.textContent = `Tie Game. Player and Computer both won ${humanWinCount} rounds.`;
-                } else if (humanWinCount > computerWinCount) {
-                    winner.textContent = `You won the game! You won ${humanWinCount} rounds, beating Computer's score of ${computerWinCount}.`;
-                } else {
-                    winner.textContent = `You lost the game :( Computer won ${computerWinCount} rounds, beating your score of ${humanWinCount}.`;
+        // Play the animation
+        animation.play();
+
+            if (round <= 5) {
+                roundText.textContent = `Round ${round}\n`; // Update the round display
+                playRound(button.textContent, getComputerChoice());
+                
+                // Increment round
+                round++;
+                
+                if(playerWonRound === true) {
+                    humanWinCount++;
+                    playerWonRound = false;
+                } else if(computerWonRound === true){
+                    computerWinCount++;
+                    computerWonRound = false;
                 }
+
+                if (round > 5) {
+                    buttons.forEach( (button) => {
+                        button.disabled = true;
+                    });
+
+                    // Update the winner display
+                    const winner = document.getElementById('winner');
+                    if (humanWinCount === computerWinCount) {
+                        winner.textContent = `Tie Game. Player and Computer both won ${humanWinCount} rounds.`;
+                    } else if (humanWinCount > computerWinCount) {
+                        winner.textContent = `You won the game! You won ${humanWinCount} rounds, beating Computer's score of ${computerWinCount}.`;
+                    } else {
+                        winner.textContent = `You lost the game :( Computer won ${computerWinCount} rounds, beating your score of ${humanWinCount}.`;
+                    }
+                }
+
             }
         });
     });

@@ -1,0 +1,33 @@
+#buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 300px; /* Adjust this value to control spacing between buttons and text */
+}
+
+button {
+    transition: transform 0.2s ease-in-out;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+/* #results, #round, #score, #winner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+#round {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px; /* Add some spacing below */
+}
+
+#results, #winner {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 20px; /* Add some spacing below */
+}
