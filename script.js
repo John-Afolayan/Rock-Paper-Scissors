@@ -28,13 +28,26 @@ function playRound(playerSelection, computerSelection) {
         playerWonRound = true;
         return;
     }  else {
-        resultsDiv.textContent = (`You Lose! beats ${computerSelection} beats ${playerSelection}.`);
+        resultsDiv.textContent = (`You Lose! ${computerSelection} beats ${playerSelection}.`);
         computerWonRound = true;
         return;
     }
 
     // resultsDiv.textContent = (`You Lose! ${computerSelection} beats ${playerSelection}.`);
 }
+
+function displayResultText() {
+    const resultText = document.getElementById('result');
+    
+    if (playerWonRound) {
+        resultText.textContent = 'You win! Rock beats Scissors.';
+    } else if (computerWonRound) {
+        resultText.textContent = 'You lose! Paper beats Rock.';
+    } else {
+        resultText.textContent = 'It\'s a tie!';
+    }
+}
+
 
 function game() {
     humanWinCount = 0;
@@ -43,40 +56,41 @@ function game() {
     roundText = document.getElementById('round');
     let round = 1; // Initialize the round count
 
-    const buttonContainer = document.querySelector('#buttons');
-
-    const rockBtn = document.createElement('button');
-    rockBtn.textContent = 'Rock';
-    buttonContainer.appendChild(rockBtn);
-    
-    const paperBtn = document.createElement('button');
-    paperBtn.textContent = 'Paper';
-    buttonContainer.appendChild(paperBtn);
-
-    const scissorsBtn = document.createElement('button');
-    scissorsBtn.textContent = 'Scissors';
-    buttonContainer.appendChild(scissorsBtn);
-
     const buttons = document.querySelectorAll('button');
+
     
     buttons.forEach((button) => {
         button.addEventListener('click', () => {
-                    // Update the video source based on the clicked option
-        const animation = document.getElementById('animation');
+        // Update the video source based on the clicked option
+        const humanAnimation = document.getElementById('human-animation');
+        const computerAnimation = document.getElementById('computer-animation');
+        
         if (button.textContent === 'Rock') {
-            animation.src = 'rock.gif';
+            humanAnimation.src = 'assets/rock.gif';
         } else if (button.textContent === 'Paper') {
-            animation.src = 'paper.gif';
+            humanAnimation.src = 'assets/paper.gif';
         } else if (button.textContent === 'Scissors') {
-            animation.src = 'scissors.gif';
+            humanAnimation.src = 'assets/scissors.gif';
         }
+        
+        // Determine the computer's choice and set its GIF accordingly
+        const computerChoice = getComputerChoice();
+        if (computerChoice === 'Rock') {
+            computerAnimation.src = 'assets/rock_flipped.gif';
+        } else if (computerChoice === 'Paper') {
+            computerAnimation.src = 'assets/paper_flipped.gif';
+        } else if (computerChoice === 'Scissors') {
+            computerAnimation.src = 'assets/scissors_flipped.gif';
+        }
+        
 
-        // Play the animation
-        animation.play();
+        // Play the animations
+        humanAnimation.style.display = 'block';
+        computerAnimation.style.display = 'block';
 
             if (round <= 5) {
                 roundText.textContent = `Round ${round}\n`; // Update the round display
-                playRound(button.textContent, getComputerChoice());
+                playRound(button.textContent, computerChoice);
                 
                 // Increment round
                 round++;

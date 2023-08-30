@@ -1,12 +1,22 @@
+body {
+    font-family: monospace, Arial, Helvetica, sans-serif;
+}
+
 #buttons {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     margin-top: 300px; /* Adjust this value to control spacing between buttons and text */
 }
 
 button {
     transition: transform 0.2s ease-in-out;
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+    font-size: 0px; /* Hides text from user since image represents the button but the text is still needed for JavaScript logic */
+
 }
 
 button:hover {
@@ -30,4 +40,30 @@ button:hover {
     font-size: 18px;
     text-align: center;
     margin-bottom: 20px; /* Add some spacing below */
+}
+
+.animation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Adjust spacing between animations and text */
+}
+
+.animation-gif {
+    max-width: 30%; /* Ensure the GIF fits within the container */
+    display: none; /* Hide the GIF initially */
+}
+
+.human {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 105px;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    font-size: 80px;
+    font-weight: 900;
+    margin-top: 50px;
 }
