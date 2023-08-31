@@ -62,7 +62,14 @@ button:hover {
 #results, #winner {
     font-size: 18px;
     text-align: center;
-    margin-bottom: 20px; /* Add some spacing below */
+}
+
+#results {
+    margin-top: 60px;
+}
+
+#winner {
+    margin-top: 40px 0px 00px 0px;
 }
 
 .animation-container {

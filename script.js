@@ -91,7 +91,7 @@ function game() {
         humanAnimation.style.display = 'block';
         computerAnimation.style.display = 'block';
 
-            if (round <= 5) {
+            if (humanWinCount < 5 || computerWinCount < 5) {
                 roundText.textContent = `Round ${round}\n`; // Update the round display
                 playRound(button.textContent, computerChoice);
                 
@@ -109,7 +109,7 @@ function game() {
                 humanText.textContent = `Human | Score: ${humanWinCount}`;
                 computerText.textContent = `Computer | Score: ${computerWinCount}`;
 
-                if (round > 5) {
+                if (humanWinCount >= 5 || computerWinCount >= 5) {
                     buttons.forEach( (button) => {
                         button.disabled = true;
                     });
