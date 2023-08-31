@@ -4,30 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Paper Scissors</title>
+    <title>🪨📄✂️</title>
     <script type="text/javascript" src="script.js" defer></script> 
     <link rel="stylesheet"  href="style.css">
 </head>
 <body>
-    <div class="title">Rock Paper Scissors</div>
-    <div id="buttons">
-        <div class="button-container">
-            <button><img src="assets/rock.png" width="200" height="180" alt="Rock Button"/>Rock</button>
-            <button><img src="assets/paper.png" width="200" height="170" alt="Paper Button"/>Paper</button>
-            <button><img src="assets/scissors.png" width="200" height="160" alt="Scissors Button"/>Scissors</button>
+    <div class="container">
+        <div class="title">Rock Paper Scissors</div>
+        <div class="description">Do you have what it takes to defeat a determined computer?<br>First to 5 wins. Good luck!</div>
+        <div id="button-text">Choose Your Weapon: Rock, Paper, or Scissors.</div>
+        <div id="buttons">
+            <div id="button-container">
+                <button><img src="assets/rock.png" width="200" height="180" alt="Rock Button"/>Rock</button>
+                <button><img src="assets/paper.png" width="200" height="170" alt="Paper Button"/>Paper</button>
+                <button><img src="assets/scissors.png" width="200" height="160" alt="Scissors Button"/>Scissors</button>
+            </div>
         </div>
+        <div id="round"></div>
+        <div class="human-computer-text">
+            <div id="human-text"></div>
+            <div id="computer-text"></div>
+        </div>
+        <div class="animation-container">
+            <div class="human">
+                <img id="human-animation" class="animation-gif" alt="Human Selection">
+            </div>
+            <div class="computer">
+                <img id="computer-animation" class="animation-gif" alt="Computer Selection">
+            </div>
+        </div>
+        <div id="results"></div>
+        <div id="score"></div>
+        <div id="winner"></div>
     </div>
-    <div class="animation-container">
-        <div class="human">
-            <img id="human-animation" class="animation-gif" alt="Human Selection">
-        </div>
-        <div class="computer">
-            <img id="computer-animation" class="animation-gif" alt="Computer Selection">
-        </div>
-    </div>
-    <div id="results"></div>
-    <div id="round">Round 1:</div>
-    <div id="score"></div>
-    <div id="winner"></div>
 </body>
 </html>

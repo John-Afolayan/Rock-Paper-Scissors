@@ -58,6 +58,9 @@ function game() {
 
     const buttons = document.querySelectorAll('button');
 
+    const humanText = document.getElementById("human-text");
+    const computerText = document.getElementById("computer-text");
+
     
     buttons.forEach((button) => {
         button.addEventListener('click', () => {
@@ -102,6 +105,9 @@ function game() {
                     computerWinCount++;
                     computerWonRound = false;
                 }
+
+                humanText.textContent = `Human | Score: ${humanWinCount}`;
+                computerText.textContent = `Computer | Score: ${computerWinCount}`;
 
                 if (round > 5) {
                     buttons.forEach( (button) => {
